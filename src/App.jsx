@@ -1,35 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import {useState} from "react";
+import Banner from "./content/Banner";
+import Skills from "./content/Skills";
+import Projects from "./content/Projects";
+import Contact from "./content/Contact";
+import styled from "styled-components";
+// import "./App.css";
+
+const Container = styled.div`
+  height: 100vh;
+  background-color: #242424;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  overflow-y: auto;
+  scrollbar-width: none;
+  color: white;
+  background-image: url("./images/bg.jpeg");
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+    <Container>
+      <Banner />
+      <Skills />
+      <Projects />
+      <Contact />
+    </Container>
+  );
 }
 
-export default App
+export default App;
