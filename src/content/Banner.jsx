@@ -1,9 +1,11 @@
-import React, {Suspense} from "react";
-import styled from "styled-components";
-import NavBar from "../components/NavBar";
-import {FiDownload} from "react-icons/fi";
-import {Canvas} from "@react-three/fiber";
 import {MeshDistortMaterial, OrbitControls, Sphere} from "@react-three/drei";
+import {Canvas, useLoader} from "@react-three/fiber";
+import React, {Suspense, useEffect, useRef, useState} from "react";
+import {FiDownload} from "react-icons/fi";
+import styled from "styled-components";
+import * as THREE from "three";
+import NavBar from "../components/NavBar";
+
 const WIDHT = window.innerWidth;
 
 const Section = styled.div`
@@ -53,6 +55,9 @@ const Left = styled.div`
 const Right = styled.div`
   position: relative;
   flex: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   @media only screen and (max-width: 768px) {
     flex: 1;
@@ -222,6 +227,10 @@ const Image = styled.img`
 `;
 
 const Banner = () => {
+  const materialRef = useRef();
+
+  const texture = useLoader(THREE.TextureLoader, "./images/planet.png");
+
   return (
     <Section>
       <NavBar />
@@ -249,17 +258,26 @@ const Banner = () => {
               <OrbitControls enableZoom={false} />
               <ambientLight intensity={1} />
               <directionalLight position={[3, 2, 1]} />
-              <Sphere args={[1, 100, 200]} scale={2.4}>
+              <Sphere args={[1, 100, 150]} scale={2.0}>
                 <MeshDistortMaterial
-                  color="#3d1c56"
-                  attach="material"
-                  distort={0.5}
-                  speed={2}
+                  map={texture}
+                  distort={0.17}
+                  speed={1}
+                  ref={materialRef}
                 />
               </Sphere>
             </Suspense>
           </Canvas>
-          <Image src="./images/hero.png" />
+          {/* <Canvas>
+            <ambientLight />
+            <pointLight position={[10, 10, 10]} />
+            <ThreeModel
+              path={"/images/planet3.glb"}
+              scale={1.2}
+              position={[0, 0, 0]}
+            />
+          </Canvas> */}
+          <Image src="./images/rocket-astronaut.png" />
         </Right>
       </Container>
     </Section>
