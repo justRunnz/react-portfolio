@@ -1,9 +1,13 @@
 import React from "react";
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
+import theme from "../theme";
+import "../css/NavBarLogo.css";
 
 const Section = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
+  width: 100%;
 
   @media only screen and (max-width: 768px) {
     width: 100%;
@@ -11,10 +15,11 @@ const Section = styled.div`
 `;
 
 const Container = styled.div`
-  width: 1400px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0px 50px;
 
   @media only screen and (max-width: 768px) {
     width: 100%;
@@ -30,13 +35,14 @@ const Links = styled.div`
 
 const Logo = styled.img`
   height: 50px;
-  filter: invert(1);
+  // filter: invert(1);
 `;
 
 const List = styled.ul`
   display: flex;
-  gap: 50px;
+  gap: 20px;
   list-style: none;
+  align-items: center;
 
   @media only screen and (max-width: 768px) {
     display: none;
@@ -46,7 +52,7 @@ const List = styled.ul`
 const TextLogo = styled.p`
   font-size: 22px;
   font-weight: 600;
-  color: white;
+  color: ${theme.colors.primary};
   margin-left: 10px;
   font-family: "nasalization-regular";
   &:hover {
@@ -74,11 +80,13 @@ const TextLogo = styled.p`
 const ListItem = styled.li`
   font-size: 16px;
   cursor: pointer;
+  color: ${theme.colors.primary};
+  font-family: "poppins-semibold";
   &:after {
     content: "";
     display: flex;
     width: 100%;
-    border-bottom: 1px solid;
+    border-bottom: 2px solid;
     opacity: 0;
     -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
     transition: opacity 0.35s, transform 0.35s;
@@ -97,36 +105,62 @@ const Icons = styled.div``;
 const Icon = styled.img``;
 
 const Button = styled.button`
-  background-color: #da4ea2;
-  color: white;
   border: none;
-  padding: 7.5px 20px;
   border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
   font-family: "poppins-semibold";
+  letter-spacing: 1px;
+  // text-transform: uppercase;
+  color: ${theme.colors.primary};
+  background-color: transparent;
+  transition: all 1000ms;
+  font-size: 15px;
+  position: relative;
+  overflow: hidden;
+  padding: 7.5px 20px;
+
+  &:before {
+    content: "";
+    position: absolute;
+    left: -50px;
+    top: 0;
+    width: 0;
+    height: 100%;
+    background-color: ${theme.colors.primary};
+    transform: skewX(45deg);
+    z-index: -1;
+    transition: width 1000ms;
+  }
+
+  &:hover {
+    color: #ffffff;
+    transform: scale(1.1);
+    outline: 2px solid #ffffff;
+    box-shadow: 4px 5px 17px -4px ${theme.colors.primary};
+  }
+
+  &:hover:before {
+    width: 250%;
+  }
 `;
 
 const NavBar = () => {
   return (
     <Section>
       <Container>
+        <div style={{display: "flex", alignItems: "center"}}>
+          {/* <Logo src="./images/logo.svg" alt="logo" /> */}
+
+          <TextLogo>justRunz</TextLogo>
+        </div>
         <Links>
-          <div style={{display: "flex", alignItems: "center"}}>
-            <Logo src="./images/logo.png" alt="logo" />
-            <TextLogo>justRunz</TextLogo>
-          </div>
           <List>
             <ListItem>Home</ListItem>
             <ListItem>Studio</ListItem>
             <ListItem>Projects</ListItem>
             {/* <ListItem>Contact</ListItem> */}
+            <Button>Contact</Button>
           </List>
         </Links>
-        {/* <Icons> */}
-        {/* <Icon src="./images/icon.png" alt="icon" /> */}
-        <Button>Contact</Button>
-        {/* </Icons> */}
       </Container>
     </Section>
   );

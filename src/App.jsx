@@ -4,17 +4,18 @@ import Skills from "./content/Skills";
 import Projects from "./content/Projects";
 import Contact from "./content/Contact";
 import styled from "styled-components";
+import theme from "./theme";
 // import "./App.css";
 
 const Container = styled.div`
   height: 100vh;
-  background-color: #242424;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
+  background-color: ${theme.colors.secondary};
+  // scroll-snap-type: y mandatory;
+  // scroll-behavior: smooth;
   overflow-y: auto;
   scrollbar-width: none;
   color: white;
-  background-image: url("./images/bg.jpeg");
+  // background-image: url("./images/bg.jpeg");
   &::-webkit-scrollbar {
     display: none;
   }

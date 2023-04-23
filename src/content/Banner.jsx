@@ -1,10 +1,9 @@
-import {MeshDistortMaterial, OrbitControls, Sphere} from "@react-three/drei";
-import {Canvas, useLoader} from "@react-three/fiber";
-import React, {Suspense, useEffect, useRef, useState} from "react";
-import {FiDownload} from "react-icons/fi";
+import {AiFillGithub} from "react-icons/ai";
+import {IoLogoLinkedin} from "react-icons/io";
+import React from "react";
 import styled from "styled-components";
-import * as THREE from "three";
 import NavBar from "../components/NavBar";
+import theme from "../theme";
 
 const WIDHT = window.innerWidth;
 
@@ -13,7 +12,7 @@ const Section = styled.div`
   scroll-snap-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  // justify-content: space-between;
   align-items: center;
 
   // @media only screen and (max-width: 768px) {
@@ -22,10 +21,11 @@ const Section = styled.div`
 `;
 
 const Container = styled.div`
-  height: 100vh;
-  width: 1600px;
+  // height: 100vh;
+  width: 1100px;
   display: flex;
   justify-content: space-between;
+  margin-top: 50px;
 
   @media only screen and (max-width: 768px) {
     width: 100%;
@@ -36,8 +36,8 @@ const Container = styled.div`
 `;
 
 const Left = styled.div`
-  margin-top: 100px;
-  flex: 2;
+  // margin-top: 100px;
+  // flex: 2;
 
   @media only screen and (max-width: 768px) {
     flex: 1;
@@ -53,11 +53,9 @@ const Left = styled.div`
 `;
 
 const Right = styled.div`
-  position: relative;
-  flex: 3;
   display: flex;
   justify-content: center;
-  align-items: center;
+  // align-items: center;
 
   @media only screen and (max-width: 768px) {
     flex: 1;
@@ -70,10 +68,10 @@ const Right = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 48px;
+  font-size: 44px;
   font-weight: 600;
-  color: white;
-  font-family: "poppins-medium";
+  color: ${theme.colors.primary};
+  font-family: "poppins-bold";
   margin-top: 100px;
   &:hover {
     -webkit-mask-image: linear-gradient(
@@ -110,7 +108,7 @@ const Title = styled.h1`
 const Description = styled.p`
   font-size: 16px;
   font-weight: 400;
-  color: white;
+  color: ${theme.colors.primary};
   margin: 20px 0px 52px 0px;
   font-family: "poppins-regular";
   width: 500px;
@@ -181,7 +179,7 @@ const Button = styled.button`
     bottom: 0;
     padding: 0.75rem 0;
     margin: 0 0 0 1.5rem;
-    color: white;
+    color: ${theme.colors.primary};
     font-weight: 700;
     line-height: 1.6;
     text-align: center;
@@ -202,21 +200,42 @@ const Button = styled.button`
 `;
 
 const Image = styled.img`
-  width: 650px;
-  height: 600px;
+  width: 350px;
+  height: 350px;
+  object-fit: cover;
   margin-top: 100px;
-  object-fit: contain;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  animation: animate 2s infinite ease alternate;
+  animation: anim 15s infinite ease alternate;
+  border-radius: 20%;
+  border: 5px solid;
 
   @media only screen and (max-width: 768px) {
     width: 300px;
     height: 300px;
+  }
+
+  @keyframes anim {
+    0% {
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+      border-color: ${theme.colors.primary};
+    }
+
+    30% {
+      border-color: #9ac4f8;
+    }
+
+    50% {
+      border-radius: 100%;
+      border-color: #f29ca3;
+    }
+
+    70% {
+      border-color: #b8d8ba;
+    }
+
+    100% {
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+      border-color: ${theme.colors.primary};
+    }
   }
 
   @keyframes animate {
@@ -226,60 +245,96 @@ const Image = styled.img`
   }
 `;
 
+const Paragraph = styled.p`
+  font-size: 16px;
+  font-weight: 400;
+  color: ${theme.colors.primary};
+  margin-right: 20px;
+  font-family: "poppins-semibold";
+
+  @media only screen and (max-width: 768px) {
+    padding: 20px;
+    text-align: center;
+  }
+
+  @media only screen and (max-width: 480px) {
+    font-size: 14px;
+    width: 100%;
+    text-align: center;
+  }
+`;
+
+const Line = styled.div`
+  background-color: ${theme.colors.primary};
+  height: 25px;
+  margin-right: 20px;
+  width: 1px;
+`;
+
+const TechContainer = styled.div`
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+  margin-top: -100px;
+`;
+
+const Icons = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+`;
+
+const Icon = styled.img`
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  // border-radius: 50%;
+`;
+
 const Banner = () => {
-  const materialRef = useRef();
-
-  const texture = useLoader(THREE.TextureLoader, "./images/planet.png");
-
   return (
     <Section>
       <NavBar />
       <Container>
         <Left>
           <Title>
-            Hey, I'm justRunz, a <br /> full-stack developer.
+            Full-Stack Web & Mobile <br />
+            Developer
           </Title>
           <Description>
-            I'm a full-stack developer with a passion for creating beautiful and
-            connected websites and mobile applications.
+            Hi, I'm Rui Gaspar. I'm an enthusiastic Full-Stack Web & Mobile
+            Developer who currently resides in France.
           </Description>
-          <Button className="learn-more">
-            <div className="circle">
-              <div className="icon arrow">
-                <FiDownload size={20} color="white" />
-              </div>
-            </div>
-            <span className="button-text">My Resume</span>
-          </Button>
+          <div style={{display: "flex", gap: "10px"}}>
+            <a href="https://github.com/justRunnz" target="_blank">
+              <AiFillGithub size={35} color={theme.colors.primary} />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/rui-gaspar-web-developpeur/"
+              target="_blank"
+            >
+              <IoLogoLinkedin size={35} color={theme.colors.primary} />
+            </a>
+          </div>
         </Left>
         <Right>
-          <Canvas>
-            <Suspense fallback={null}>
-              <OrbitControls enableZoom={false} />
-              <ambientLight intensity={1} />
-              <directionalLight position={[3, 2, 1]} />
-              <Sphere args={[1, 100, 150]} scale={2.0}>
-                <MeshDistortMaterial
-                  map={texture}
-                  distort={0.17}
-                  speed={1}
-                  ref={materialRef}
-                />
-              </Sphere>
-            </Suspense>
-          </Canvas>
-          {/* <Canvas>
-            <ambientLight />
-            <pointLight position={[10, 10, 10]} />
-            <ThreeModel
-              path={"/images/planet3.glb"}
-              scale={1.2}
-              position={[0, 0, 0]}
-            />
-          </Canvas> */}
-          <Image src="./images/rocket-astronaut.png" />
+          <Image src="./images/me.png" />
         </Right>
       </Container>
+      <TechContainer>
+        <Paragraph>Principal Tech Stack</Paragraph>
+        <Line />
+        <Icons>
+          <Icon src="./images/icons/html.png" />
+          <Icon src="./images/icons/css3.png" />
+          <Icon src="./images/icons/react.png" />
+          <Icon src="./images/icons/js.png" style={{borderRadius: "50%"}} />
+          <Icon src="./images/icons/firebase.png" />
+        </Icons>
+      </TechContainer>
     </Section>
   );
 };
